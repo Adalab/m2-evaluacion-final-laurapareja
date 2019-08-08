@@ -1,4 +1,6 @@
 _foto por defecto_
+fondo + oscuro, color mas claro Vs lo contrario
+lista de favoritos en data. (array) index of... push/splice
 
 let favourites = [];
 
