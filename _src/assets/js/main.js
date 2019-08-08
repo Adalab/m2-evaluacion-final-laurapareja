@@ -28,7 +28,8 @@ function searchSerie(event) {
                 let imageSerie = serie.show.image.original;
                 console.log(nameSerie);
                 const seriesContainer = document.querySelector('.js-series-container');
-                seriesContainer.innerHTML += nameSerie += `<img src="${imageSerie}"></img>`;
+                seriesContainer.innerHTML += `<div class="serieContainer"><h2 class="titleSerie">${nameSerie}</h2><img class="img" src="${imageSerie}"></div>`;
+
             }
         });
 
@@ -54,7 +55,7 @@ form.addEventListener('submit', searchSerie);
 //     let seriesFilter = '';
 
 //     for (let i = 0; i < series.length; i++) {
-//         seriesFilter += `<li>${nameSerie[series]} </li>`;
+//         seriesFilter += ` < li > $ { nameSerie[series] } < /li>`;
 //         seriesFilter += `<img>${imageSerie[series]} </img>`;
 //     }
 

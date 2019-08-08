@@ -1,0 +1,14 @@
+.series-container {
+    display: inline-block;
+    width: 100%;
+    background-color: lightblue;
+    .serieContainer {
+        background-color: lightpink;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+    }
+    .img {
+        width: 200px;
+    }
+}
