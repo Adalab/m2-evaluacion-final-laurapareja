@@ -97,14 +97,27 @@ function saveUpdatedFavouriteList(updatedFavouriteList) {
     localStorage.setItem('favourites', JSON.stringify(updatedFavouriteList));
 };
 
+function findFavouriteSelected(favouriteSelected) {
+    fetch(`http://api.tvmaze.com/search/shows?q=${favouriteSelected}`)
+        .then(response => response.json())
+        .then(data => {
+            paintSeries(data);
+            listenSeries();
+        });
+}
 
-
-///
+// no se como clickar y eliminar directamente.. redirecciono y asi el usuario lo hace a mano, y si encuentra una peli con ese nombre q tambien le llame, puede aprovechar
 
 function removeItemFavourite(event) {
     const containerSelected = event.currentTarget;
-    containerSelected.classList.remove('favourite');
-}
+    // console.log(containerSelected);
+    // console.log(containerSelected.querySelector('h2'));
+    const nameSelected = containerSelected.querySelector('h2');
+    const favouriteSelected = nameSelected.textContent;
+    console.log(favouriteSelected);
+    findFavouriteSelected(favouriteSelected);
+};
+
 
 
 function paintFavouriteSeries() {
@@ -114,7 +127,7 @@ function paintFavouriteSeries() {
         const image = favourite.image;
         favouriteList.innerHTML += `<div class="serieContainer favourite"><h2 class="title-favourite">${name}</h2><img class="img imgFavourite" src="${image}"></img><div>`;
     }
-    let containersSelected = document.querySelectorAll('.favourite');
+    let containersSelected = favouriteList.querySelectorAll('.favourite');
     for (let containerSelected of containersSelected) {
         containerSelected.addEventListener('click', removeItemFavourite);
     }
