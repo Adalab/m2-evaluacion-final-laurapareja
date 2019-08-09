@@ -2,12 +2,12 @@
 
 const form = document.querySelector('.js-form');
 const searchButton = document.querySelector('.search-button');
-const seriesContainer = document.querySelector('.js-series-container');
+let seriesContainer = document.querySelector('.js-series-container');
 const favouriteList = document.querySelector('.js-favourite-list');
 // let series = [];
 let favourites = getSavedFavouriteList();
+const footer = document.querySelector('.js-footer');
 paintFavouriteSeries();
-
 
 function searchSerie(event) {
     event.preventDefault();
@@ -23,7 +23,6 @@ function searchSerie(event) {
             listenSeries();
         });
 };
-
 
 function getSavedFavouriteList() {
     const savedFavourites = JSON.parse(localStorage.getItem('favourites'));
@@ -104,7 +103,7 @@ function paintFavouriteSeries() {
     for (let favourite of favourites) {
         const name = favourite.name;
         const image = favourite.image;
-        favouriteList.innerHTML += `<h2>${name}</h2><img class="img imgFavourite" src="${image}"></img>`;
+        favouriteList.innerHTML += `<h2 class="title-favourite">${name}</h2><img class="img imgFavourite" src="${image}"></img>`;
     }
 }
 

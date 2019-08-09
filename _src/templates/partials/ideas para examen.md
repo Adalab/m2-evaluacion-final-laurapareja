@@ -1,16 +1,27 @@
-**_foto por defecto_
+## Requisitios
 
-fondo + oscuro, color mas claro Vs lo contrario
+
+### hechos
+
+* foto por defecto
+* fondo + oscuro, color mas claro Vs lo contrario
 lista de favoritos en data. (array) index of... push/splice
-seleccionar series de todas las paginas
+* seleccionar series de todas las paginas
+* save data
+
+
+
+## to do
+
+lista de recomendados
 transformar busqueda mayuscula minuscula
-save data
 enlazar imagenes favoritas
 
-hacer mas ramas
-README
 estilo
 revisar codigo y comentarlo
+hacer mas ramas
+README
+
 
 
 
