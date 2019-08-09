@@ -9,8 +9,6 @@ let favourites = getSavedFavouriteList();
 paintFavouriteSeries();
 
 
-//comienzo
-
 function searchSerie(event) {
     event.preventDefault();
     const inputSerie = document.querySelector('.js-input-serie').value;
@@ -26,6 +24,7 @@ function searchSerie(event) {
         });
 };
 
+
 function getSavedFavouriteList() {
     const savedFavourites = JSON.parse(localStorage.getItem('favourites'));
     if (savedFavourites === null) {
@@ -36,25 +35,35 @@ function getSavedFavouriteList() {
 };
 
 
+function getClassSerie(serie) {
+    if (favourites.findIndex(favourite => favourite.name === serie.show.name) !== -1) {
+        return 'serieContainer favourite';
+    } else {
+        return 'serieContainer';
+    }
+};
+
+
+function getSerieImageUrl(serie) {
+    if (serie.show.image === null) {
+        return `https://via.placeholder.com/210x295/ffffff/666666/?text=${serie.show.name}`;
+    } else {
+        return serie.show.image.original;
+    }
+};
+
+
 const paintSeries = (series) => {
     seriesContainer.innerHTML = '';
     for (let serie of series) {
         let nameSerie = serie.show.name;
-        let imageSerie = '';
+        let imageSerie = getSerieImageUrl(serie);
+        let classSerie = getClassSerie(serie);
 
-        if (serie.show.image === null) {
-            imageSerie = `https://via.placeholder.com/210x295/ffffff/666666/?text=${nameSerie}`;
-        } else {
-            imageSerie = serie.show.image.original;
-        }
-        let classSerie = 'serieContainer';
-
-        if (favourites.findIndex(favourite => favourite.name === nameSerie) !== -1) {
-            classSerie += ' favourite';
-        }
         seriesContainer.innerHTML += `<div class="${classSerie}"><h2 class="titleSerie">${nameSerie}</h2><img class="img" src="${imageSerie}"></div>`;
     }
 };
+
 
 const listenSeries = () => {
     const serieElements = document.querySelectorAll('.serieContainer');
@@ -87,7 +96,7 @@ const toggleFavourites = (event) => {
 
 function saveUpdatedFavouriteList(updatedFavouriteList) {
     localStorage.setItem('favourites', JSON.stringify(updatedFavouriteList));
-}
+};
 
 
 function paintFavouriteSeries() {
