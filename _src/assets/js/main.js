@@ -98,12 +98,25 @@ function saveUpdatedFavouriteList(updatedFavouriteList) {
 };
 
 
+
+///
+
+function removeItemFavourite(event) {
+    const containerSelected = event.currentTarget;
+    containerSelected.classList.remove('favourite');
+}
+
+
 function paintFavouriteSeries() {
     favouriteList.innerHTML = '';
     for (let favourite of favourites) {
         const name = favourite.name;
         const image = favourite.image;
-        favouriteList.innerHTML += `<h2 class="title-favourite">${name}</h2><img class="img imgFavourite" src="${image}"></img>`;
+        favouriteList.innerHTML += `<div class="serieContainer favourite"><h2 class="title-favourite">${name}</h2><img class="img imgFavourite" src="${image}"></img><div>`;
+    }
+    let containersSelected = document.querySelectorAll('.favourite');
+    for (let containerSelected of containersSelected) {
+        containerSelected.addEventListener('click', removeItemFavourite);
     }
 }
 
