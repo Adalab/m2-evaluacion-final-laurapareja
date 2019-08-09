@@ -18,7 +18,7 @@ function searchSerie(event) {
     event.preventDefault();
     const inputSerie = document.querySelector('.js-input-serie').value;
 
-    fetch(`http://api.tvmaze.com/search/shows?q=${inputSerie}`)
+    fetch(`https://api.tvmaze.com/search/shows?q=${inputSerie}`)
         .then(response => response.json())
         .then(data => {
             event.preventDefault();
