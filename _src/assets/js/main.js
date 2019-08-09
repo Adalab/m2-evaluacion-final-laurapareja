@@ -1,7 +1,8 @@
 'use strict';
 //declaro constantes o variables a usar en varias funciones
 
-const form = document.querySelector('.js-form');
+const form = document.querySelector('.js-form'); // console.log(favouriteSelected);
+// findFavouriteSelected(favouriteSelected);
 const searchButton = document.querySelector('.search-button');
 let seriesContainer = document.querySelector('.js-series-container');
 const favouriteList = document.querySelector('.js-favourite-list');
@@ -64,7 +65,7 @@ const paintSeries = (series) => {
         let imageSerie = getSerieImageUrl(serie);
         let classSerie = getClassSerie(serie);
 
-        seriesContainer.innerHTML += `<div class="${classSerie}"><h2 class="titleSerie">${nameSerie}</h2><img class="img" src="${imageSerie}"></div>`;
+        seriesContainer.innerHTML += `<div class="${classSerie}"><img class="img" src="${imageSerie}"><h2 class="titleSerie">${nameSerie}</h2><div class="favouriteIconContainer"><i class="fas fa-heart favourite-icon"></i></div></div>`;
     }
 };
 
