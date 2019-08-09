@@ -1,29 +1,32 @@
 'use strict';
+//declaro constantes o variables a usar en varias funciones
 
 const form = document.querySelector('.js-form');
 const searchButton = document.querySelector('.search-button');
 let seriesContainer = document.querySelector('.js-series-container');
 const favouriteList = document.querySelector('.js-favourite-list');
-// let series = [];
+
+// la lista de favoritos se genera con el resultado de esta función
 let favourites = getSavedFavouriteList();
-const footer = document.querySelector('.js-footer');
+
+//pinto las series guardadas en el localstorage
 paintFavouriteSeries();
 
+//busco la serie
 function searchSerie(event) {
     event.preventDefault();
     const inputSerie = document.querySelector('.js-input-serie').value;
-    // console.log(`Voy a buscar ${inputSerie}`);
 
     fetch(`http://api.tvmaze.com/search/shows?q=${inputSerie}`)
         .then(response => response.json())
         .then(data => {
             event.preventDefault();
-            // console.log(data);
             paintSeries(data);
             listenSeries();
         });
 };
 
+//guardo la lista de favoritos en el localStorage, parseandolo, of course
 function getSavedFavouriteList() {
     const savedFavourites = JSON.parse(localStorage.getItem('favourites'));
     if (savedFavourites === null) {
@@ -33,7 +36,9 @@ function getSavedFavouriteList() {
     }
 };
 
-
+//para buscar si el elemento está en la array favourites
+//indexOf no es válido porque mi array está formado por objetos
+//https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/findIndex
 function getClassSerie(serie) {
     if (favourites.findIndex(favourite => favourite.name === serie.show.name) !== -1) {
         return 'serieContainer favourite';
@@ -42,7 +47,7 @@ function getClassSerie(serie) {
     }
 };
 
-
+//obtengo la imagen de la serie o pongo una por defecto
 function getSerieImageUrl(serie) {
     if (serie.show.image === null) {
         return `https://via.placeholder.com/210x295/ffffff/666666/?text=${serie.show.name}`;
@@ -51,7 +56,7 @@ function getSerieImageUrl(serie) {
     }
 };
 
-
+// pinto las series que han sido filtradas en la búsqueda
 const paintSeries = (series) => {
     seriesContainer.innerHTML = '';
     for (let serie of series) {
@@ -63,7 +68,7 @@ const paintSeries = (series) => {
     }
 };
 
-
+// activo los listeners de todas las series a través de un bucle
 const listenSeries = () => {
     const serieElements = document.querySelectorAll('.serieContainer');
 
@@ -72,31 +77,35 @@ const listenSeries = () => {
     }
 };
 
-
+//añado la clase favorito si no la tiene y lo contrario
 const toggleFavourites = (event) => {
     const containerSelected = event.currentTarget;
     containerSelected.classList.toggle('favourite');
 
     if (containerSelected.classList.contains('favourite')) {
-        //acabo de añadirlo a favoritos
+        //creo los elementos que voy a guardar en favoritos
         const nameSerieFavourite = containerSelected.querySelector('h2').textContent;
         const imgSerieFavourite = containerSelected.querySelector('.img').src;
-        const listSerieFavourite = { name: nameSerieFavourite, image: imgSerieFavourite };
-        favourites.push(listSerieFavourite);
+        const serieFavourite = { name: nameSerieFavourite, image: imgSerieFavourite };
+        //meto la serie en la array
+        favourites.push(serieFavourite);
     } else {
-        //acabo de quitarlo de favoritos
+        //quito la serie de la lista de favoritos
         const indexSerie = favourites.findIndex(el => el.name === containerSelected.querySelector('h2').textContent);
         favourites.splice(indexSerie, 1);
     }
+    //guardo la lista actualizada
     saveUpdatedFavouriteList(favourites);
+    //pinto la lista favorita
     paintFavouriteSeries();
 };
 
-
+//guardo la lista actualizada en el localStorage
 function saveUpdatedFavouriteList(updatedFavouriteList) {
     localStorage.setItem('favourites', JSON.stringify(updatedFavouriteList));
 };
 
+//encontrar la serie favorita en el buscador
 function findFavouriteSelected(favouriteSelected) {
     fetch(`http://api.tvmaze.com/search/shows?q=${favouriteSelected}`)
         .then(response => response.json())
@@ -106,8 +115,7 @@ function findFavouriteSelected(favouriteSelected) {
         });
 }
 
-// no se como clickar y eliminar directamente.. redirecciono y asi el usuario lo hace a mano, y si encuentra una peli con ese nombre q tambien le llame, puede aprovechar
-
+// busco la serie seleccionada como favorita
 function removeItemFavourite(event) {
     const containerSelected = event.currentTarget;
     // console.log(containerSelected);
@@ -116,10 +124,13 @@ function removeItemFavourite(event) {
     const favouriteSelected = nameSelected.textContent;
     console.log(favouriteSelected);
     findFavouriteSelected(favouriteSelected);
+
+    // const indexSerie = favourites.findIndex(el => el.name === containerSelected.querySelector('h2').textContent);
+    //        favourites.splice(indexSerie, 1);
+
 };
 
-
-
+// pinto las series favoritas
 function paintFavouriteSeries() {
     favouriteList.innerHTML = '';
     for (let favourite of favourites) {
@@ -133,5 +144,6 @@ function paintFavouriteSeries() {
     }
 }
 
+// declaro el listener del input que va a activar las demás funciones
 searchButton.addEventListener('click', searchSerie);
-form.addEventListener('submit', searchSerie);
+form.addEventListener('keyup', searchSerie);
