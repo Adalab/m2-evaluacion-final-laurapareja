@@ -5,7 +5,8 @@ const searchButton = document.querySelector('.search-button');
 const seriesContainer = document.querySelector('.js-series-container');
 const favouriteList = document.querySelector('.js-favourite-list');
 // let series = [];
-let favourites = [];
+let favourites = getSavedFavouriteList();
+paintFavouriteSeries();
 
 
 //comienzo
@@ -25,6 +26,16 @@ function searchSerie(event) {
         });
 };
 
+function getSavedFavouriteList() {
+    const savedFavourites = JSON.parse(localStorage.getItem('favourites'));
+    if (savedFavourites === null) {
+        return [];
+    } else {
+        return savedFavourites;
+    }
+};
+
+
 const paintSeries = (series) => {
     seriesContainer.innerHTML = '';
     for (let serie of series) {
@@ -36,7 +47,12 @@ const paintSeries = (series) => {
         } else {
             imageSerie = serie.show.image.original;
         }
-        seriesContainer.innerHTML += `<div class="serieContainer"><h2 class="titleSerie">${nameSerie}</h2><img class="img" src="${imageSerie}"></div>`;
+        let classSerie = 'serieContainer';
+
+        if (favourites.findIndex(favourite => favourite.name === nameSerie) !== -1) {
+            classSerie += ' favourite';
+        }
+        seriesContainer.innerHTML += `<div class="${classSerie}"><h2 class="titleSerie">${nameSerie}</h2><img class="img" src="${imageSerie}"></div>`;
     }
 };
 
@@ -50,181 +66,38 @@ const listenSeries = () => {
 
 
 const toggleFavourites = (event) => {
-    // console.log(event.currentTarget);
     const containerSelected = event.currentTarget;
     containerSelected.classList.toggle('favourite');
 
-    const nameSerieFavourite = containerSelected.querySelector('h2').textContent;
-    const imgSerieFavourite = containerSelected.querySelector('.img').src;
-
-    const listSerieFavourite = { name: nameSerieFavourite, image: imgSerieFavourite };
-
-    // console.log(nameSerieFavourite);
-    // console.log(imgSerieFavourite);
-
-    if (containerSelected.classList.contains("favourite")) {
+    if (containerSelected.classList.contains('favourite')) {
+        //acabo de añadirlo a favoritos
+        const nameSerieFavourite = containerSelected.querySelector('h2').textContent;
+        const imgSerieFavourite = containerSelected.querySelector('.img').src;
+        const listSerieFavourite = { name: nameSerieFavourite, image: imgSerieFavourite };
         favourites.push(listSerieFavourite);
     } else {
-        favourites.splice(listSerieFavourite);
+        //acabo de quitarlo de favoritos
+        const indexSerie = favourites.findIndex(el => el.name === containerSelected.querySelector('h2').textContent);
+        favourites.splice(indexSerie, 1);
     }
-    console.log(favourites);
-    // getIndex(containerSelected);
-    // paintFavourites();
-    isFavouriteSerie();
-    // paintFavourites();
-
-    // function paintFavourites() {
-    //     if (foundIndex >= 0) {
-    //         console.log(`Check if paletteIndex ${containerSelected} it is favorite >>>`, true);
-    //         return true;
-    //     } else {
-    //         console.log(`Check if paletteIndex ${containerSelected} it is not favorite >>>`, false);
-    //         return false;
-    //     }
-    // }
-
+    saveUpdatedFavouriteList(favourites);
+    paintFavouriteSeries();
 };
 
-function isFavouriteSerie() {
+
+function saveUpdatedFavouriteList(updatedFavouriteList) {
+    localStorage.setItem('favourites', JSON.stringify(updatedFavouriteList));
+}
+
+
+function paintFavouriteSeries() {
+    favouriteList.innerHTML = '';
     for (let favourite of favourites) {
-        const foundIndex = favourites.indexOf(favourite);
-        if (foundIndex >= 0) {
-            console.log(`Check if paletteIndex ${favourite.name} it is favorite >>>`, true);
-            const nameFavourite = favourite.name;
-            const imageFavourite = favourite.image;
-
-            favouriteList.innerHTML = `<h2>${nameFavourite}</h2> <img class="img" src="${imageFavourite}"></img>`;
-            return true;
-        }
-
+        const name = favourite.name;
+        const image = favourite.image;
+        favouriteList.innerHTML += `<h2>${name}</h2><img class="img imgFavourite" src="${image}"></img>`;
     }
-};
-
-// function paintFavourites(favourite) {
-//     favouriteList.innerHTML = '';
-//     for (const favourite of favourites) {
-//         const nameFavourite = favourite.name;
-//         const imageFavourite = favourite.image;
-
-//         favouriteList.innerHTML += `<h2>${nameFavourite}</h2> <img src="${imageFavourite}"></img>`;
-//     }
-// };
-
-// console.log(favourites);
-
-// favouriteList.innerHTML = `${favourites}`;
+}
 
 searchButton.addEventListener('click', searchSerie);
 form.addEventListener('submit', searchSerie);
-
-// const getFavouriteClassName = serieIndex => {
-
-//     if (isFavouriteSerie(serieIndex)) {
-//         return 'series__item--favorite';
-//     } else {
-//         return '';
-//     }
-// };
-
-// function listenSeries(seriesContainer) {
-//     console.log(seriesContainer);
-//     // serieContainer.style.background = 'red';
-//     const serieContainers = document.querySelectorAll('.serieContainer');
-//     for (let serie of serieContainers) {
-//         ser// const getFavouriteClassName = serieIndex => {
-
-//     if (isFavouriteSerie(serieIndex)) {
-//         return 'series__item--favorite';
-//     } else {
-//         return '';
-//     }
-// };
-
-// function listenSeries(seriesContainer) {
-//     console.log(seriesContainer);
-//     // serieContainer.style.background = 'red';
-//     const serieContainers = document.querySelectorAll('.serieContainer');
-//     for (let serie of serieContainers) {
-//         seriesContainer.addEventListener('click', handleClick);
-//     }
-// };iesContainer.addEventListener('click', handleClick);
-//     }
-// };
-
-
-// const handleClick = ev => {
-//     const serieIndex = getClickedPalette(ev);
-//     if (isFavouritePalette(serieIndex)) {
-//         removeFavourite(serieIndex);
-//     } else {
-//         addFavourite(serieIndex);
-//     }
-//     listenSeries();
-// };
-
-
-// const getClickedPalette = ev => {
-//     const currentTarget = ev.currentTarget;
-//     const clickedSerieIndex = parseInt(currentTarget.dataset.index);
-//     console.log('Get clicked palette from event and return the clicked palette index >>> Clicked palette:', clickedSerieIndex);
-//     return clickedSerieIndex;
-// };
-
-
-// const isFavouriteSerie = serieIndex => {
-//     const foundIndex = favourites.indexOf(serieIndex);
-//     if (foundIndex >= 0) {
-//         console.log(`Check if serieIndex ${serieIndex} it is favorite >>>`, true);
-//         return true;
-//     } else {
-//         console.log(`Check if serieIndex ${serieIndex} it is not favorite >>>`, false);
-//         return false;
-//     }
-// };
-
-// const addFavorite = serieIndex => {
-//     favourites.push(serieIndex);
-//     console.log('Add paletteIndex to `favorites` array >>> Favorites:', favourites);
-// };
-
-// const removeFavorite = serieIndex => {
-//     const favoriteIndex = favourites.indexOf(serieIndex);
-//     favourites.splice(favoriteIndex, 1);
-//     console.log('Remove paletteIndex from `favorites` array >>> Favorites:', favourites);
-// };
-
-// console.log(favourites);
-
-
-
-
-
-// console.log(series);
-
-
-// function formataSeries(nameSerie, imageSerie) {
-//     const resultSeries = [];
-
-//     resultSeries.push({
-//         name: nameSerie,
-//         image: imageSerie,
-//     });
-//     const nameSerieResult = resultSeries[0].name;
-//     const imageSerieResult = resultSeries[0].image;
-
-//     console.log('Format JSON data and return it as array', nameSerieResult, imageSerieResult);
-
-//     const seriesContainer = document.querySelector('.js-series-container');
-//     let seriesFilter = '';
-
-//     for (let i = 0; i < series.length; i++) {
-//         seriesFilter += ` < li > $ { nameSerie[series] } < /li>`;
-//         seriesFilter += `<img>${imageSerie[series]} </img>`;
-//     }
-
-//     seriesContainer.innerHTML = seriesFilter;
-
-//     // series.push(resultSeries);
-//     // console.log(resultSeries);
-
-// }
