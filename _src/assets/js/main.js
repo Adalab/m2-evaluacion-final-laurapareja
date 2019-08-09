@@ -78,7 +78,7 @@ const listenSeries = () => {
     }
 };
 
-//añado la clase favorito si no la tiene y lo contrario
+//añado la clase favorita si no la tiene y lo contrario
 const toggleFavourites = (event) => {
     const containerSelected = event.currentTarget;
     containerSelected.classList.toggle('favourite');

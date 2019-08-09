@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: black;
+    background-color: $colorBackground;
     color: $colorQuaternary;
     padding: 30px;
     text-align: center;
@@ -10,4 +10,32 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.form {
+    padding: 20px 0 20px 20px;
+    position: absolute;
+    left: 0;
+    @media all and (max-width: 768px) {
+        right: 0;
+    }
+}
+
+.input-serie {
+    @media all and (max-width: 768px) {
+        margin-top: 150px;
+        background-color: white;
+    }
+}
+
+.input-serie,
+.search-button {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.search-button {
+    background-color: $colorPrimary;
+    color: $colorQuaternary;
+    border: solid $colorPrimary 1px;
 }

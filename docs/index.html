@@ -1,25 +1,43 @@
 <!DOCTYPE html>
-<!-- <html lang="en"> -->
 <html lang="es">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>HOLA MUNDO</title>
+        <link rel="stylesheet" href="./assets/css/style.css"
+        />
+        <!-- <link href="https://fonts.googleapis.com/css?family=Merriweather:900|Montserrat:400,700|Open+Sans:400,600&display=swap"
+        rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata|Kalam|Squada+One&display=swap"
+        rel="stylesheet" />-->
+        <script src="https://kit.fontawesome.com/ea8c8602a3.js"></script>
+    </head>
+    
+    <body class="body">
+        <header class="header">
+             <h1 class="title">Buscador de series</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> HOLA MUNDO</title>
-    <link rel="stylesheet" href="./assets/css/main.css">
-</head>
+            <form class="js-form form">
+                <input type="text" class="js-input-serie input-serie" id="inputSerie">
+                <button for="inputSerie" class="search-button">Search</button>
+            </form>
+        </header>
+        <main class="main-container">
+            <aside class="section-favourite">
+                <div class="js-series-favourite-container">
+                     <h2 class="favourite-title">Mis series favoritas</h2>
 
-<body class="body">
-    <div class="container">
-        <div class="text_container">
-            <h1 class="title">HOLA MUNDO</h1>
-
-            <button class="js-button button">Update</button>
-        </div>
-        <img class="js-quote" id="myImg"></img>
-    </div>
-    <script src="./assets/js/main.js"></script>
-</body>
+                    <ul class="favourite-list js-favourite-list"></ul>
+                </div>
+            </aside>
+            <section class="section-series">
+                <div class="js-series-container series-container"></div>
+            </section>
+        </main>
+        <script type="text/javascript" src="./assets/js/main.js"></script>
+    </body>
 
 </html>

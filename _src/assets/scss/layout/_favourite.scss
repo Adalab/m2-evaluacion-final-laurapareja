@@ -1,0 +1,54 @@
+.section-favourite {
+    display: flex;
+    width: 70%;
+    padding-right: 30px;
+    .favourite-title {
+        font-size: 25px;
+        padding-bottom: 10px;
+        text-align: center;
+        padding-left: 30px;
+    }
+}
+
+.title-favourite {
+    background-color: black;
+    font-size: 20px;
+    text-align: center;
+}
+
+.favourite {
+    border: $colorPrimary solid 10px;
+    background-color: black;
+    color: white;
+    .favouriteIconContainer {
+        background-color: black;
+    }
+    .titleSerie {
+        background-color: black;
+    }
+}
+
+.favourite .serieContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.favouriteIconContainer {
+    .favourite-icon {
+        color: darkred;
+    }
+}
+
+.img {
+    opacity: 0.5;
+    transition: opacity ease 0.8s;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.list-favourite {
+    display: flex;
+    flex-direction: row;
+}

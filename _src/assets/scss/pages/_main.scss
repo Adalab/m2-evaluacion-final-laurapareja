@@ -15,19 +15,21 @@
     color: $colorTertiary;
     font-size: 30px;
     padding-bottom: 15px;
-    // transition: color ease 0.5s;
-    // &:hover {
-    //     color: $colorPrimary;
-    // }
+}
+
+.serieContainer {
+    margin: 5px 0 10px 0;
+}
+
+.titleSerie {
+    background-color: $colorSecondary;
 }
 
 .series-container {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    // height: 85%;
     background-color: $colorTertiary;
-    // margin-bottom: 30px;
     .serieContainer {
         display: flex;
         flex-direction: column;
@@ -42,97 +44,22 @@
         opacity: 0.5;
     }
     .titleSerie {
-        color: $colorPrimary;
         font-size: 25px;
         padding: 10px 0 10px 0;
         width: 100%;
         text-align: center;
-        background-color: $colorSecondary;
     }
     .iconContainer {
         background-color: $colorBackground;
     }
 }
 
-.section-favourite {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-right: 30px;
-    .favourite-title {
-        font-size: 25px;
-        padding-bottom: 10px;
-        text-align: center;
-        padding-left: 30px;
-    }
-    .title-favourite {
-        font-size: 20px;
-    }
-}
-
-.form {
-    padding: 20px 0 20px 20px;
-    position: absolute;
-    left: 0;
-}
-
-.search-button {
-    background-color: darkred;
-    color: white;
-    border: solid darkred 1px;
-}
-
-.input-serie,
-.search-button {
-    padding: 10px;
-    font-size: 20px;
-}
-
-.favourite {
-    border: red solid 10px;
-    background-color: black;
-    .titleSerie {
-        color: white;
-        background-color: black;
-    }
-    .serieContainer {
-        display: flex;
-        flex-direction: column;
-        margin: 10px;
-    }
-    .favouriteIconContainer {
-        background-color: black;
-        .favourite-icon {
-            color: darkred;
-        }
-    }
-    .img {
-        opacity: 0.5;
-        transition: opacity ease 0.8s;
-        &:hover {
-            opacity: 1;
-        }
-    }
-}
-
 .img {
     width: 100%;
     border: solid black 1.5px;
-}
-
-.img {
     opacity: 0.5;
     transition: opacity ease 1s;
     &:hover {
         opacity: 1;
     }
-}
-
-.list-favourite {
-    display: flex;
-    flex-direction: row;
-}
-
-.serieContainer {
-    margin: 5px 0 10px 0;
 }
