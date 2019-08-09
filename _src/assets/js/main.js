@@ -105,29 +105,25 @@ function saveUpdatedFavouriteList(updatedFavouriteList) {
     localStorage.setItem('favourites', JSON.stringify(updatedFavouriteList));
 };
 
-//encontrar la serie favorita en el buscador
-function findFavouriteSelected(favouriteSelected) {
-    fetch(`http://api.tvmaze.com/search/shows?q=${favouriteSelected}`)
-        .then(response => response.json())
-        .then(data => {
-            paintSeries(data);
-            listenSeries();
-        });
-}
 
-// busco la serie seleccionada como favorita
+// elimino el favorito de favoritos
 function removeItemFavourite(event) {
     const containerSelected = event.currentTarget;
-    // console.log(containerSelected);
-    // console.log(containerSelected.querySelector('h2'));
+
     const nameSelected = containerSelected.querySelector('h2');
-    const favouriteSelected = nameSelected.textContent;
-    console.log(favouriteSelected);
-    findFavouriteSelected(favouriteSelected);
+    let favouriteSelected = nameSelected.textContent;
 
-    // const indexSerie = favourites.findIndex(el => el.name === containerSelected.querySelector('h2').textContent);
-    //        favourites.splice(indexSerie, 1);
+    //busco el elemento a eliminar en la lista de favoritos
 
+    const indexSerie = favourites.findIndex(el => el.name === favouriteSelected);
+
+    //elimino la serie de favoritos
+    favourites.splice(indexSerie, 1);
+
+    // actualizo el cambio tanto en el localstorage
+    saveUpdatedFavouriteList(favourites);
+    paintFavouriteSeries();
+    getClassSerie();
 };
 
 // pinto las series favoritas
@@ -146,4 +142,4 @@ function paintFavouriteSeries() {
 
 // declaro el listener del input que va a activar las demás funciones
 searchButton.addEventListener('click', searchSerie);
-form.addEventListener('keyup', searchSerie);
+form.addEventListener('change', searchSerie);
