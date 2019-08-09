@@ -3,7 +3,7 @@
 
 Esta es mi propuesta para el examen del módulo 2 de Adalab. Aquí he puesto en práctica los conocimientos que he aprendido sobre Javascript en los últimos...  15 días!!
 
-[Buscador de series](./public/assets/images/webpage.png)
+[Buscador de series](./docs/assets/images/webpage.png width="800px")
 
 Entre otras cosas podrás ver:
 * Javascript:
