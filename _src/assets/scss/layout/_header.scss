@@ -4,38 +4,60 @@
     width: 100%;
     background-color: $colorBackground;
     color: $colorQuaternary;
-    padding: 30px;
-    text-align: center;
+    padding: 20px 5px 10px 5px;
     z-index: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    @media all and(min-width: 1200px) {
+        flex-direction: row;
+        width: 100%;
+    }
+}
+
+.title {
+    padding: 7px;
+    font-size: 22px;
+    text-align: center;
+    width: 100vw;
+    @media all and(min-width: 1200px) {
+        font-size: 30px;
+        padding-bottom: 15px;
+    }
 }
 
 .form {
-    padding: 20px 0 20px 20px;
-    position: absolute;
-    left: 0;
-    @media all and (max-width: 768px) {
-        right: 0;
+    padding-bottom: 10px;
+    display: flex;
+    @media all and(min-width: 1200px) {
+        position: absolute;
+        left: 20px;
+        align-self: center;
     }
 }
 
 .input-serie {
-    @media all and (max-width: 768px) {
-        margin-top: 150px;
-        background-color: white;
+    width: 150px;
+    @media all and(min-width: 1200px) {
+        width: 250px;
+        font-size: 18px;
     }
 }
 
 .input-serie,
 .search-button {
-    padding: 10px;
-    font-size: 20px;
+    font-size: 15px;
+    border-radius: 2px;
+    padding: 2px 5px 0 5px;
 }
 
 .search-button {
     background-color: $colorPrimary;
     color: $colorQuaternary;
     border: solid $colorPrimary 1px;
+    width: 80px;
+}
+
+.section-series {
+    position: relative;
 }

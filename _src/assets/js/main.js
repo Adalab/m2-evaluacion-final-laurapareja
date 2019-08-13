@@ -64,8 +64,8 @@ const paintSeries = (series) => {
         let nameSerie = serie.show.name;
         let imageSerie = getSerieImageUrl(serie);
         let classSerie = getClassSerie(serie);
-
-        seriesContainer.innerHTML += `<div class="${classSerie}"><img class="img" src="${imageSerie}"><h2 class="titleSerie">${nameSerie}</h2><div class="favouriteIconContainer"><i class="fas fa-heart favourite-icon"></i></div></div>`;
+        // console.log(serie.show...);
+        seriesContainer.innerHTML += `<div class="${classSerie}" style="cursor: pointer"><img class="img" src="${imageSerie}"><h2 class="titleSerie">${nameSerie}</h2><div class="favouriteIconContainer"><i class="fas fa-heart favolanguageurite-icon"></i></div></div>`;
     }
 };
 
@@ -124,7 +124,8 @@ function removeItemFavourite(event) {
     // actualizo el cambio tanto en el localstorage
     saveUpdatedFavouriteList(favourites);
     paintFavouriteSeries();
-    getClassSerie();
+    paintSeries();
+
 };
 
 // pinto las series favoritas
@@ -133,7 +134,7 @@ function paintFavouriteSeries() {
     for (let favourite of favourites) {
         const name = favourite.name;
         const image = favourite.image;
-        favouriteList.innerHTML += `<div class="serieContainer favourite"><h2 class="title-favourite">${name}</h2><img class="img imgFavourite" src="${image}"></img><div>`;
+        favouriteList.innerHTML += `<li class="serieContainerList favourite" style="cursor: pointer"><h2 class="title-favourite-list">${name}<i class="fas fa-heart favourite-icon-list"></i></h2><img class="img imgFavourite" src="${image}"></img></li>`;
     }
     let containersSelected = favouriteList.querySelectorAll('.favourite');
     for (let containerSelected of containersSelected) {
@@ -144,3 +145,12 @@ function paintFavouriteSeries() {
 // declaro el listener del input que va a activar las demás funciones
 searchButton.addEventListener('click', searchSerie);
 form.addEventListener('change', searchSerie);
+
+
+function showfavouriteList() {
+    const listFavourite = document.querySelector('.js-favourite-list');
+    listFavourite.classList.toggle('show');
+}
+
+const favouriteMenu = document.querySelector('.js-series-favourite-container');
+favouriteMenu.addEventListener('click', showfavouriteList);

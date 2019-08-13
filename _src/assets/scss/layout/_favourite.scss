@@ -1,54 +1,112 @@
-.section-favourite {
-    display: flex;
-    width: 70%;
-    padding-right: 30px;
-    .favourite-title {
-        font-size: 25px;
-        padding-bottom: 10px;
-        text-align: center;
-        padding-left: 30px;
+.series-favourite-container {
+    position: fixed;
+    background-color: lightcoral;
+    z-index: 3;
+    top: 100px;
+    width: 100%;
+    @media all and(min-width: 1200px) {
+        top: 85px;
+        padding: 5px;
     }
 }
 
-.title-favourite {
-    background-color: black;
-    font-size: 20px;
-    text-align: center;
+.favourite-list {
+    display: none;
 }
 
+.show {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    list-style: none;
+    background-color: lightcoral;
+    height: 100%;
+    @media all and(min-width: 1200px) {
+        padding: 10px;
+    }
+}
+
+.serieContainerList {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    .imgFavourite {
+        width: 150px;
+        opacity: 1;
+        transition: opacity ease 0.5s;
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+    .title-favourite-list {
+        text-align: center;
+        font-size: 15px;
+        padding: 10px;
+    }
+    @media all and(min-width: 1200px) {
+        margin-top: 0px;
+        .title-favourite-list {
+            font-size: 18px;
+            padding: 10px;
+        }
+        .imgFavourite {
+            width: 200px;
+        }
+    }
+}
+
+.favourite-icon-list {
+    font-size: 18px;
+    color: red;
+    position: relative;
+    padding-left: 15px;
+    transition: color ease 0.5s;
+    &:hover {
+        color: grey;
+    }
+}
+
+.favourite-title {
+    padding: 10px 10px 10px 10px;
+    font-size: 18px;
+    text-align: center;
+    width: 100vw;
+    @media all and(min-width: 1200px) {
+        font-size: 22px;
+    }
+}
+
+.heart-menu {
+    color: darkred;
+}
+
+// elemento favorito en series
 .favourite {
-    border: $colorPrimary solid 10px;
     background-color: black;
     color: white;
+    border: lightcoral solid 8px;
+    .img {
+        opacity: 1;
+    }
     .favouriteIconContainer {
         background-color: black;
+        .favourite-icon {
+            color: darkred;
+        }
     }
     .titleSerie {
         background-color: black;
     }
-}
-
-.favourite .serieContainer {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
+    .serieContainer {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: red;
+    }
 }
 
 .favouriteIconContainer {
     .favourite-icon {
-        color: darkred;
+        color: grey;
+        font-size: 20px;
     }
-}
-
-.img {
-    opacity: 0.5;
-    transition: opacity ease 0.8s;
-    &:hover {
-        opacity: 1;
-    }
-}
-
-.list-favourite {
-    display: flex;
-    flex-direction: row;
 }
