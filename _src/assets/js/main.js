@@ -65,7 +65,7 @@ const paintSeries = (series) => {
         let imageSerie = getSerieImageUrl(serie);
         let classSerie = getClassSerie(serie);
         // console.log(serie.show...);
-        seriesContainer.innerHTML += `<div class="${classSerie}" style="cursor: pointer"><img class="img" src="${imageSerie}"><h2 class="titleSerie">${nameSerie}</h2><div class="favouriteIconContainer"><i class="fas fa-heart favolanguageurite-icon"></i></div></div>`;
+        seriesContainer.innerHTML += `<div class="${classSerie}" style="cursor: pointer"><img class="img" src="${imageSerie}"><h2 class="titleSerie">${nameSerie}</h2><div class="favouriteIconContainer"><i class="fas fa-heart favourite-icon"></i></div></div>`;
     }
 };
 
