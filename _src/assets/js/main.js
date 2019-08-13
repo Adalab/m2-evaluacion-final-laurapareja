@@ -10,6 +10,10 @@ const favouriteList = document.querySelector('.js-favourite-list');
 // la lista de favoritos se genera con el resultado de esta función
 let favourites = getSavedFavouriteList();
 
+
+// lista de elementos buscados
+let series = [];
+
 //pinto las series guardadas en el localstorage
 paintFavouriteSeries();
 
@@ -21,11 +25,20 @@ function searchSerie(event) {
     fetch(`https://api.tvmaze.com/search/shows?q=${inputSerie}`)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             event.preventDefault();
+            formatData(data);
             paintSeries(data);
             listenSeries();
         });
 };
+
+function formatData(data) {
+    for (let serie of data) {
+        let name = serie.show.name;
+        series.push(name);
+    }
+}
 
 //guardo la lista de favoritos en el localStorage, parseandolo, of course
 function getSavedFavouriteList() {
@@ -64,17 +77,33 @@ const paintSeries = (series) => {
         let nameSerie = serie.show.name;
         let imageSerie = getSerieImageUrl(serie);
         let classSerie = getClassSerie(serie);
+        let genresSerie = serie.show.genres;
+        console.log(serie.show.genres);
 
-        seriesContainer.innerHTML += `<div class="${classSerie}"><img class="img" src="${imageSerie}"><h2 class="titleSerie">${nameSerie}</h2><div class="favouriteIconContainer"><i class="fas fa-heart favourite-icon"></i></div></div>`;
+
+        let listGenres = "";
+        for (let genreSerie of genresSerie) {
+            let genreSerieContent = `<li>${genreSerie}</li>`;
+            listGenres += genreSerieContent;
+        }
+
+        seriesContainer.innerHTML += `<li class="${classSerie}" style="cursor: pointer"><img class="img" src="${imageSerie}"><h2 class="titleSerie">${nameSerie}</h2><ul>${listGenres}</ul><div class="favouriteIconContainer"><i class="fas fa-heart favourite-icon"></i></div></li>`;
+        // seriesContainer.innerHTML += `<li class="${classSerie}" style="cursor: pointer"><img class="img" src="${imageSerie}"><h2 class="titleSerie">${nameSerie}</h2><p>${genresSerie}</p><div class="favouriteIconContainer"><i class="fas fa-heart favourite-icon"></i></div></li>`;
     }
-};
+
+}; // console.log(serie.show);
+
+function paintConsole() {
+
+}
+
+
 
 // activo los listeners de todas las series a través de un bucle
 const listenSeries = () => {
     const serieElements = document.querySelectorAll('.serieContainer');
-
     for (const serieElement of serieElements) {
-        serieElement.addEventListener("click", toggleFavourites);
+        serieElement.addEventListener("click", paintConsole);
     }
 };
 
@@ -124,7 +153,8 @@ function removeItemFavourite(event) {
     // actualizo el cambio tanto en el localstorage
     saveUpdatedFavouriteList(favourites);
     paintFavouriteSeries();
-    getClassSerie();
+    paintSeries();
+
 };
 
 // pinto las series favoritas
@@ -133,7 +163,7 @@ function paintFavouriteSeries() {
     for (let favourite of favourites) {
         const name = favourite.name;
         const image = favourite.image;
-        favouriteList.innerHTML += `<div class="serieContainer favourite"><h2 class="title-favourite">${name}</h2><img class="img imgFavourite" src="${image}"></img><div>`;
+        favouriteList.innerHTML += `<li class="serieContainerList favourite" style="cursor: pointer"><h2 class="title-favourite-list">${name}<i class="fas fa-heart favourite-icon-list"></i></h2><img class="img imgFavourite" src="${image}"></img></li>`;
     }
     let containersSelected = favouriteList.querySelectorAll('.favourite');
     for (let containerSelected of containersSelected) {
@@ -144,3 +174,12 @@ function paintFavouriteSeries() {
 // declaro el listener del input que va a activar las demás funciones
 searchButton.addEventListener('click', searchSerie);
 form.addEventListener('change', searchSerie);
+
+
+function showfavouriteList() {
+    const listFavourite = document.querySelector('.js-favourite-list');
+    listFavourite.classList.toggle('show');
+}
+
+const favouriteMenu = document.querySelector('.js-series-favourite-container');
+favouriteMenu.addEventListener('click', showfavouriteList);
