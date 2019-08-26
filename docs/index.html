@@ -20,21 +20,23 @@
 
             <form class="js-form form">
                 <input type="text" class="js-input-serie input-serie" id="inputSerie">
-                <button for="inputSerie" class="search-button">Search</button>
+                <button for="inputSerie" class="search-button" style="cursor: pointer">Search</button>
             </form>
         </header>
         <main class="main-container">
             <aside class="section-favourite">
-                <div class="js-series-favourite-container">
-                     <h2 class="favourite-title">Mis series favoritas</h2>
+                <div class="js-series-favourite-container series-favourite-container"
+                style="cursor: pointer">
+                     <h2 class="favourite-title">Mis series favoritas <i class="fas fa-heart heart-menu"></i></h2>
 
-                    <ul class="favourite-list js-favourite-list"></ul>
                 </div>
+                <ul class="favourite-list js-favourite-list"></ul>
             </aside>
             <section class="section-series">
                 <div class="js-series-container series-container"></div>
             </section>
         </main>
+        <footer class="footer">&copy; Laura Pareja</footer>
         <script type="text/javascript" src="./assets/js/main.js"></script>
     </body>
 

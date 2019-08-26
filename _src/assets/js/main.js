@@ -10,6 +10,10 @@ const favouriteList = document.querySelector('.js-favourite-list');
 // la lista de favoritos se genera con el resultado de esta función
 let favourites = getSavedFavouriteList();
 
+
+// lista de elementos buscados
+let series = [];
+
 //pinto las series guardadas en el localstorage
 paintFavouriteSeries();
 
@@ -21,11 +25,20 @@ function searchSerie(event) {
     fetch(`https://api.tvmaze.com/search/shows?q=${inputSerie}`)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             event.preventDefault();
+            formatData(data);
             paintSeries(data);
             listenSeries();
         });
 };
+
+function formatData(data) {
+    for (let serie of data) {
+        let name = serie.show.name;
+        series.push(name);
+    }
+}
 
 //guardo la lista de favoritos en el localStorage, parseandolo, of course
 function getSavedFavouriteList() {
@@ -68,14 +81,16 @@ const paintSeries = (series) => {
         // console.log(serie.show...);
         seriesContainer.innerHTML += `<div class="${classSerie}" style="cursor: pointer"><img class="img" src="${imageSerie}"><h2 class="titleSerie">${nameSerie}</h2><div class="favouriteIconContainer"><i class="fas fa-heart favourite-icon"></i></div></div>`;
     }
-};
+
+}; // console.log(serie.show);
+
+
 
 // activo los listeners de todas las series a través de un bucle
 const listenSeries = () => {
     const serieElements = document.querySelectorAll('.serieContainer');
-
     for (const serieElement of serieElements) {
-        serieElement.addEventListener("click", toggleFavourites);
+        serieElement.addEventListener("click", paintConsole);
     }
 };
 
@@ -154,4 +169,5 @@ function showfavouriteList() {
 }
 
 const favouriteMenu = document.querySelector('.js-series-favourite-container');
+favouriteMenu.addEventListener('click', showfavouriteList);
 favouriteMenu.addEventListener('click', showfavouriteList);
