@@ -3,7 +3,7 @@
 
 Esta es mi propuesta para el examen del módulo 2 de Adalab. Aquí he puesto en práctica los conocimientos que he aprendido sobre Javascript en los últimos...  15 días!!
 
-![Buscador de series](./docs/assets/images/webpage.png)
+![Buscador de series](./docs/assets/images/webpage1.png)
 
 Entre otras cosas podrás ver:
 * Javascript:
@@ -29,3 +29,6 @@ Se me han ocurrido unas cuantas ideas de mejora que pondré en práctica próxim
 - enlace a trailers de la serie
 
 Si tienes alguna sugerencia, estoy abierta a propuestas ^ ^.
+
+![Buscador de series](./docs/assets/images/webpage2.png)
+![Buscador de series](./docs/assets/images/webpage3.png)
